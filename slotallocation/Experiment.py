@@ -1,4 +1,4 @@
-from Layer import Layer
+from slotallocation.Layer import Layer
 import hashlib
 
 class Experiment:
@@ -25,7 +25,7 @@ class Experiment:
 
 	def evaluate_subject(self,subjectId):
 		#hashId to number between 0 and 1000
-		bit = int(hashlib.sha256((subjectId+self.layer.name).encode()).hexdigest(),16) % 1000	
+		bit = self.hash_subect(subjectId+self.layer.name)
 		
 		#check bit
 		for arm in self.slots:
@@ -33,6 +33,10 @@ class Experiment:
 				return arm
 
 		return None
+
+	def hash_subject(self, hash_string):
+                return int(hashlib.sha256((hash_string).encode()).hexdigest(),16) % 1000
+
 
 	def bitInSlots(self,slots,bit):
 		binary_string = bin(int(slots, 16))[2:].zfill(1000)

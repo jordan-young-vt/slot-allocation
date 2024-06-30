@@ -1,6 +1,6 @@
 import ast
-from Layer import Layer
-from Experiment import Experiment
+from slotallocation.Layer import Layer
+from slotallocation.Experiment import Experiment
 
 class CLIDriver:
 	def __init__(self):

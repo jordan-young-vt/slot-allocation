@@ -1,7 +1,7 @@
 #Driver Class for Slot Allocation
 
-from Experiment import Experiment
-from Layer import Layer
+from slotallocation.Experiment import Experiment
+from slotallocation.Layer import Layer
 
 
 myLayer = Layer("myLayer")
