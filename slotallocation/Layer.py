@@ -14,34 +14,39 @@ class Layer:
 		
 
 	def allocate_slots_to_arm(self,arm_slots):
+		
+		#Check if there is space
+		if (arm_slots > self.remaining_slots()):
+			raise ValueError("There are not enough slots remaining")
 
 		#Set up string of 0s#
 		zeros = list('0'*1000)
-
+	
 		# Convert hexadecimal string to binary string
 		binary_string = bin(int(self.allocated_slots, 16))[2:].zfill(1000)
-    
+	    
 		# Find indices of '0' bits
 		changeable_indices = [i for i, bit in enumerate(binary_string) if bit == '0']
-    
+	    
 		# Choose `num_bits` random indices from zero_indices to flip
 		indices_to_flip = random.sample(changeable_indices, min(arm_slots, len(changeable_indices)))
-    
+	    
 		# Flip the selected bits
 		flipped_binary_list = list(binary_string)
- 
+	 
 		for idx in indices_to_flip:
 			flipped_binary_list[idx] = '1'
 			zeros[idx] = '1'    
-
+	
 		flipped_binary_string = ''.join(flipped_binary_list)
-    
+	    
 		# Convert back to hexadecimal
 		flipped_hex_string = hex(int(flipped_binary_string, 2))[2:].zfill(250)
-    
+	    
 		self.allocated_slots = flipped_hex_string.upper()
-
+	
 		return hex(int(''.join(zeros),2))[2:].zfill(250).upper()
+
 
 	def deallocate_slots(self, slots):
 		#Convert Existing slot string to binary
@@ -79,6 +84,6 @@ if __name__=="__main__":
 	l.allocate_slots_to_arm(100)
 	print(l.remaining_slots())
 	l.print_slots()
-	l.allocate_slots_to_arm(50)
+	l.allocate_slots_to_arm(5000)
 	print(l.remaining_slots())
 	l.print_details()

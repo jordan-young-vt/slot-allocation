@@ -26,6 +26,7 @@ class TestClass:
 		slots='1'+'0'*249
 		exp = Experiment('exp',Layer('l'),{"control":100,"treatment":100})
 		assert exp.bitInSlots(slots,3)==True
+		assert exp.bitInSlots(slots,4)==False
 
 	def test_hash(self):
 		exp = Experiment('exp',Layer('l'),{"control":100,"treatment":100})

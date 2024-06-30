@@ -11,7 +11,10 @@ class Experiment:
 		if sum(buckets.values()) > layer.remaining_slots():
 			raise ValueError(f"Bucket value {sum(buckets.values())} exceeds remaining_buckets {layer.remaining_slots()} for Layer {layer.name}.")
 		for arm in buckets:				
-			self.slots[arm]=layer.allocate_slots_to_arm(buckets[arm])
+			try:
+				self.slots[arm]=layer.allocate_slots_to_arm(buckets[arm])
+			except ValueError as ve:
+				print(ve)
 		layer.addExperiment(self)
 
 	def print_slots(self):
