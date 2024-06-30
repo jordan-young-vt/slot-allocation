@@ -31,3 +31,7 @@ class TestClass:
 	def test_hash(self):
 		exp = Experiment('exp',Layer('l'),{"control":100,"treatment":100})
 		assert exp.hash_subject('al')==46
+
+	def test_overallocation(self):
+		with pytest.raises(ValueError, match="Bucket value 1200 exceeds remaining_buckets 1000 for Layer l."):
+			Experiment('exp',Layer('l'),{"control":600,"treatment":600})

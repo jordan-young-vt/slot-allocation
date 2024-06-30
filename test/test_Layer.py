@@ -19,4 +19,8 @@ class TestClass:
 		s2 = l.allocate_slots_to_arm(150)
 		l.deallocate_slots(s2)
 		assert l.remaining_slots()==900
-		
+
+	def test_overallocation_error(self):
+		l= Layer('myLayer')
+		with pytest.raises(ValueError, match="There are not enough slots remaining"):
+			s1 = l.allocate_slots_to_arm(1100)		
