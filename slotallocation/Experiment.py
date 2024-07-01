@@ -28,7 +28,7 @@ class Experiment:
 
 	def evaluate_subject(self,subjectId):
 		#hashId to number between 0 and 1000
-		bit = self.hash_subect(subjectId+self.layer.name)
+		bit = self.hash_subject(subjectId+self.layer.name)
 		
 		#check bit
 		for arm in self.slots:
